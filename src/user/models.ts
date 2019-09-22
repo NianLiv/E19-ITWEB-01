@@ -3,20 +3,19 @@ import passportLocalMongoose from 'passport-local-mongoose';
 import { PassportLocalSchema } from 'mongoose';
 
 export interface User extends Document {
-    firstname : string;
+    firstName : string;
     lastName : string;
     email : string;
-    password : string;
     fullName: string;
 }
 
 export const userSchema = new Schema<User> (
     {
-        firstname: {
+        firstName: {
             type: String,
             trim: true
         },
-        lastname: {
+        lastName: {
             type: String,
             trim: true
         },
@@ -26,10 +25,6 @@ export const userSchema = new Schema<User> (
             lowercase: true, 
             unique: true
         },
-        password: {
-            type: String,
-            required: true
-        }
     },
     {
         timestamps: true
@@ -37,7 +32,7 @@ export const userSchema = new Schema<User> (
 ) as PassportLocalSchema;
 
 userSchema.virtual('fullName').get(function(this: User) {
-    return `${this.firstname} ${this.lastName}`;
+    return `${this.firstName} ${this.lastName}`;
 });
 
 userSchema.plugin(passportLocalMongoose, {

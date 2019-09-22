@@ -8,7 +8,9 @@ import cookieParser from 'cookie-parser';
 import connectFlash from 'connect-flash';
 import passport from 'passport';
 import User from './user/models';
+import { join } from 'path';
 
+import * as userController from './user/user.controller';
 
 const app = express();
 const router = express.Router();
@@ -20,7 +22,8 @@ mongoose.connect(
 mongoose.set("useCreateIndex", true);
 
 app.set("port", process.env.PORT || 3000);
-app.set("view engine", "ejs");
+app.set("views", ['./src', './src/user']);
+app.set("view engine", "ejs"); 
 
 router.use(
     methodOverride("_method", {
@@ -68,8 +71,13 @@ router.use((req, res, next) => {
 // ------------------------ Routes -------------------------- //
 
 router.get('/', (req, res) => {
-    res.send('Hello World!'); 
+    res.send('Hej med dig!!!!');  
 });
+
+router.get('/login', userController.loginView);
+router.post('/login', userController.authenticate);
+router.get('/sign-up', userController.signUpView);
+router.post('/sign-up', userController.signUp);
 
 
 // --------------------------------------------------------- //

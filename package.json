@@ -2,7 +2,7 @@
   "name": "e19-itweb-01",
   "version": "1.0.0",
   "description": "School assignment",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && nodemon dist/app.js"
@@ -40,6 +40,7 @@
     "@types/express-session": "^1.15.14",
     "@types/method-override": "0.0.31",
     "@types/mongoose": "^5.5.17",
+    "@types/node": "^12.7.5",
     "@types/passport": "^1.0.1",
     "@types/passport-local-mongoose": "^4.0.12"
   }
