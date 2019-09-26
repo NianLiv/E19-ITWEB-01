@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+  }
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 20vh;
+}
+
+.login-container .card {
+    align-self: start;
+    width: 400px;
+} 

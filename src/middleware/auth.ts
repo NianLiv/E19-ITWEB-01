@@ -9,4 +9,13 @@ export function auth(req: Request, res: Response, next: NextFunction) {
     } else {
         res.redirect('/user/login');
     }
-}   
+} 
+
+export function unauth(req: Request, res: Response, next: NextFunction) {
+    const user = req.user as User;
+    if (user) {
+        res.redirect('/');
+    } else {
+        next();
+    }
+}

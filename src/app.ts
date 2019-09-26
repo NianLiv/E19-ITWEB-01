@@ -18,6 +18,7 @@ class App {
     private config(): void {
         this.app.set("views", ['./src', './src/user', './src/workout']);
         this.app.set("view engine", "ejs");
+        this.app.use(express.static('src/public'));
     }
 
     private setupRouter() {

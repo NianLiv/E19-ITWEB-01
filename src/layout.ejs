@@ -5,14 +5,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
 	<title>Workout App</title>
-	<!-- <link rel="stylesheet" href="/css/bootstrap.css"> -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
 	<% if (loggedIn) { %>
 		<nav>This is the nav</nav>
-	<% } %> 
-	<div class="container">
+	<% } %>
+	<div class="app-container"> 
 		<%- body %>
 	</div>
 </body>
