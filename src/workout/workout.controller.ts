@@ -1,6 +1,8 @@
 import { NextFunction, Response, Request } from 'express';
 import workout, { Workout } from './models/workout.model';
 import exercise, {Exercise} from './models/exercise.model';
+import user from '../user/models';
+
 
 const getWorkoutParams = (body: Workout) => {
     return {
@@ -42,15 +44,26 @@ export default class WorkoutController {
     };
 
     static addNewWorkout(req: Request, res: Response, next: NextFunction): void {
+        const currentUser = res.locals.currentUser;
         const workoutParams = getWorkoutParams(req.body);
         workout.create(workoutParams)
             .then(workout => {
-                console.log(workout);
-                res.redirect('/workout');
-                next();
+                user.findByIdAndUpdate(currentUser._id, {
+                    $addToSet: {
+                        workouts: workout
+                    }
+                })
+                .then(() => {
+                    res.redirect('/workout');
+                    next();
+                })
+                .catch(err => {
+                    console.log(`Error adding workout to user: ${err.message}`);
+                    next(err);
+                });
             })
             .catch(err => {
-                console.log(`Error saving workout: ${err.message}`);
+                console.log(`Error creating workout: ${err.message}`);
                 next(err);
             });
     };

@@ -1,12 +1,15 @@
 import mongoose, {Schema, Document} from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 import { PassportLocalSchema } from 'mongoose';
+import { Workout } from '../workout/models/workout.model';
+
 
 export interface User extends Document {
     firstName : string;
     lastName : string;
     email : string;
     fullName: string;
+    workouts: Workout[]
 }
 
 export const userSchema = new Schema<User> (
@@ -25,6 +28,9 @@ export const userSchema = new Schema<User> (
             lowercase: true, 
             unique: true
         },
+        workouts: [
+            {type: Schema.Types.ObjectId, ref: 'Workout'}
+        ]
     },
     {
         timestamps: true

@@ -8,6 +8,7 @@ export function auth(req: Request, res: Response, next: NextFunction) {
         next();
     } else {
         res.redirect('/user/login');
+        next();
     }
 } 
 
