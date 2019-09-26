@@ -1,14 +1,19 @@
-<div>
-    <form action="<%=`/user/sign-up`%>" method="POST">
-        <h2>Sign up</h2>
-        <label for="inputFirstName">First Name</label>
-        <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First" autofocus>
-        <label for="inputLastName">Last Name</label>
-        <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="Last">
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputEmail">Email address</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-        <br/><button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-    </form>
+<div class="card-page-container">
+    <div class="card">
+        <div class="card-body">
+            <form action="<%=`/user/sign-up`%>" method="POST">
+                <h2 class="card-title">Sign up</h2>
+                <label for="inputFirstName">First Name</label>
+                <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First" autofocus>
+                <label for="inputLastName">Last Name</label>
+                <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="Last">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputEmail">Email address</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                <br/><button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            </form>
+            <div class="card-bottom-action"><a href="/user/login" class="card-bottom-action">Tilbage</a></div>
+        </div>
+    </div>
 </div>

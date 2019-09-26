@@ -2,7 +2,7 @@ body {
     margin: 0;
   }
 
-.login-container {
+.card-page-container {
     display: flex;
     justify-content: center;
     height: 100%;
@@ -10,7 +10,13 @@ body {
     margin-top: 20vh;
 }
 
-.login-container .card {
+.card-page-container .card {
     align-self: start;
     width: 400px;
-} 
+}
+
+.card-bottom-action {
+    margin-top: 8px;
+    width: 100%;
+    text-align: center;
+}
