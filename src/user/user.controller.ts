@@ -51,4 +51,4 @@ const getUserParams = (body: any) => {
       email: body.email,
       password: body.password,
     };
-  };
+};

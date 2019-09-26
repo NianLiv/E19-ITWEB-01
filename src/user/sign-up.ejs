@@ -1,5 +1,5 @@
 <div>
-    <form action="/sign-up" method="POST">
+    <form action="<%=`/user/sign-up`%>" method="POST">
         <h2>Sign up</h2>
         <label for="inputFirstName">First Name</label>
         <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First" autofocus>
@@ -9,6 +9,6 @@
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <label for="inputEmail">Email address</label>
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-        br /><button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <br/><button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     </form>
 </div>
