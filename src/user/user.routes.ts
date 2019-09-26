@@ -1,7 +1,8 @@
 import {Router} from "express";
 import * as userController from './user.controller';
 
-const routes : Router = Router();
+const routes : Router = Router(); 
+routes.get('/login', userController.loginView);
 routes.get('/login', userController.loginView);
 routes.post('/login', userController.authenticate);
 routes.get('/sign-up', userController.signUpView);

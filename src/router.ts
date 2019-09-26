@@ -25,9 +25,8 @@ export class AppRouter {
     }
 
     private setRoutes(): void {
-        this.router.use('/workout', workoutRoutes);
+        this.router.use('/', workoutRoutes);
         this.router.use('/user', userRoutes);
-        //this.router.use('/', userController.loginView);
     }
 
     private setupRouter(): void {

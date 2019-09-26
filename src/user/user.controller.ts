@@ -19,7 +19,7 @@ export function indexView(req: Request, res: Response) {
 
 export function signUpView(req: Request, res: Response) {
     res.render("sign-up");
-}
+} 
 
 export function signUp(req: Request, res: Response, next: NextFunction) {
     let newUser = new User(getUserParams(req.body));
@@ -38,7 +38,7 @@ export function loginView(req: Request, res: Response) {
 }
 
 export const authenticate = passport.authenticate("local", {
-    failureRedirect: '/login',
+    failureRedirect: '/user/login',
     failureFlash: 'Kom igen, brormand',
     successRedirect: '/',
     successFlash: 'Godt gået!'
