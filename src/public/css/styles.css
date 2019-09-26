@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+  }
+
+.card-page-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 20vh;
+}
+
+.card-page-container .card {
+    align-self: start;
+    width: 400px;
+}
+
+.card-bottom-action {
+    margin-top: 8px;
+    width: 100%;
+    text-align: center;
+}

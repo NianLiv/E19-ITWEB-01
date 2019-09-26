@@ -1,5 +1,6 @@
 import {Router} from "express";
 import WorkoutController from "./workout.controller";
+import { auth } from '../middleware/auth';
 
 const routes : Router = Router();
 routes.get('/', WorkoutController.index, WorkoutController.indexView);
