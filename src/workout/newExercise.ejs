@@ -1,0 +1,17 @@
+<div class="data-form">
+    <form class="form-signin" action="<%= `/workout/` + workoutID + `/new/exercise`%>" method="POST">
+        <h1><%= workoutID %></h1>
+      <h2 class="form-signin-heading">Create a new exercise:</h2>
+      <label for="inputTitle">Name</label>
+      <input type="text" name="name" id="inputTitle" class="form-control" placeholder="Title" autofocus>
+      <label for="inputDescription">Description</label>
+      <input type="text" name="description" id="inputDescription" class="form-control" placeholder="Description">
+      <label for="inputNumberOfSets">Number Of Sets</label>
+      <input type="text" name="numberOfSets" id="inputNumberOfSets" pattern="\d*" class="form-control" placeholder="Max Students" required>
+      <label for="inputTimeInMinutes">Time In Minutes </label>
+      <input type="text" name="timeInMinutes" id="inputTimeInMinutes" pattern="\d*" class="form-control" placeholder="Max Students" required>
+      <label for="inputNumberOfRepetitions">Number Of Repetitions</label>
+      <input type="text" name="numberOfRepetitions" id="inputNumberOfRepetitions" pattern="\d*" class="form-control" placeholder="Cost" required>
+      <br /><button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+    </form>
+  </div>

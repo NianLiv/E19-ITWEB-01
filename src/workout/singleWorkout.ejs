@@ -3,17 +3,20 @@
 <ul>
     <% workout.exercises.forEach(exercise => { %>
         <li>
-            <p><% exercises.name %></p>
-            <p><% exercises.description %></p>
-            <p><% exercises.numberOfSets %></p>
-            <p><% exercises.numberOfRepetitions %></p>
-            <p><% exercises.timeInMinutes %></p>
+            <p>Name: <%= exercise.name %></p>
+            <p>Description: <%= exercise.description %></p>
+            <p>Sets: <%= exercise.numberOfSets %></p>
+            <p>Repetitions: <%= exercise.numberOfRepetitions %></p>
+            <p>Time: <%= exercise.timeInMinutes %> minutes</p>
         </li>
     <% }); %>
 </ul>
   
 <div>
-<a class="button" href="<%= `/workout/${workout._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+    <a class="button" href="<%= `/workout/${workout._id}/new/exercise` %>">New Exercise</a>
+</div>
+<div>
+    <a class="button" href="<%= `/workout/${workout._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
 </div>
 <div>
     <a class="button" href="/workout">Back</a>
