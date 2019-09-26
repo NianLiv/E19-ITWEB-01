@@ -45,14 +45,12 @@ export default class WorkoutController {
     };
 
     static workoutView(req: Request, res: Response): void {
-        console.log("DAV IGEN");
-        res.render('workout');
+        res.render('singleWorkout');
     };
 
     static getWorkout(req: Request, res: Response, next: NextFunction): void {
         workout.findById(req.params.id)
             .then(workout => {
-                console.log("DAV");
                 res.locals.workout = workout;
                 next();
             })
