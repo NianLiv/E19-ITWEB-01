@@ -10,7 +10,7 @@ const getWorkoutParams = (body: Workout) => {
 
 export default class WorkoutController {
 
-    static workouts(req: Request, res: Response, next: NextFunction): void {
+    static index(req: Request, res: Response, next: NextFunction): void {
         workout.find()
             .then(workouts => {
                 res.locals.workouts = workouts;
@@ -22,8 +22,8 @@ export default class WorkoutController {
             });
     };
 
-    static workoutView(req: Request, res: Response): void {
-        res.render('workout');
+    static indexView(req: Request, res: Response): void {
+        res.render('index');
     };
 
     static newWorkoutView(req: Request, res: Response): void {
@@ -44,6 +44,22 @@ export default class WorkoutController {
             });
     };
 
+    static workoutView(req: Request, res: Response): void {
+        console.log("DAV IGEN");
+        res.render('workout');
+    };
 
+    static getWorkout(req: Request, res: Response, next: NextFunction): void {
+        workout.findById(req.params.id)
+            .then(workout => {
+                console.log("DAV");
+                res.locals.workout = workout;
+                next();
+            })
+            .catch(err => {
+                console.log(`Error getting workout: ${err.message}`);
+                next(err);
+            });
+    };
 
 };
