@@ -1,10 +1,11 @@
 import express, { Router } from 'express';
 import mongoose from "mongoose";
 import { AppRouter } from './router';
+import * as dotenv from 'dotenv';
 
 class App {
     public app : express.Application;
-    public mongoUrl: string = 'mongodb://localhost/workoutApp';  
+    public mongoUrl: string = process.env.MONGODB_URI || 'mongodb://localhost/workoutApp';  
     public router : Router;
 
     constructor() {
@@ -19,6 +20,7 @@ class App {
         this.app.set("views", ['./src', './src/user', './src/workout']);
         this.app.set("view engine", "ejs");
         this.app.use(express.static('src/public'));
+        dotenv.config();
     }
 
     private setupRouter() {
