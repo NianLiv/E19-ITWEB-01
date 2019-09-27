@@ -24,10 +24,12 @@ const getExerciseParams = (body: Exercise) => {
 export default class WorkoutController {
 
     static index(req: Request, res: Response, next: NextFunction): void {
-        workout.find()
-            .then(workouts => {
-                res.locals.workouts = workouts;
-                next();
+        user.findById(res.locals.currentUser._id).populate('workouts')
+            .then(user => {
+                if (user) {
+                    res.locals.workouts = user.workouts;
+                    next();
+                }
             })
             .catch(err => {
                 console.log(`Error fetching workout: ${err.message}`);
