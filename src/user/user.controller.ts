@@ -33,6 +33,12 @@ export function signUp(req: Request, res: Response, next: NextFunction) {
     });
 }
 
+export function logout(req: Request, res: Response, next: NextFunction) {
+    req.logOut();
+    res.redirect('/user/login');
+    next();
+}
+
 export function loginView(req: Request, res: Response) {
     res.render("login");
 }

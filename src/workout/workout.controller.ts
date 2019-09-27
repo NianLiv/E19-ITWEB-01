@@ -84,6 +84,18 @@ export default class WorkoutController {
             });
     };
 
+    static deleteWorkout(req: Request, res: Response, next: NextFunction): void {
+        workout.findByIdAndDelete(req.params.id)
+            .then(() => {
+                res.redirect('/workout');
+                next();
+            })
+            .catch(err => {
+                console.log(`Error deleting workout: ${err.message}`);
+                next(err);
+            });
+    };
+
     static newExerciseView(req: Request, res: Response): void {
         res.render('newExercise', {
             workoutID: req.params.id
