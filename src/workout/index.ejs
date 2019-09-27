@@ -1,16 +1,22 @@
-<h1>WORKOUT!</h1>
-<ul>
-    <% workouts.forEach(workout => { %>
-        <li>
-            <a href="<%= `/workout/${workout._id}` %>">
-                <%= workout.title %>
-            </a>
-        </li>
-    <% }); %>
-</ul>
 
-<div>
-    <a class="btn btn-primary btn-block" href="<%= `/workout/new` %>">New Exercise</a>
-</div>
-
-
+    <% if (!(workouts.length > 0)) { %>
+        <h4>You have no workout plans...</h4>
+    <% }  else { %>
+    
+    <h2>Your workout plans</h2>
+    </br>
+    <ul class="list-group">
+        <% workouts.forEach(workout => { %>
+            <li class="list-group-item">
+                <a href="<%= `/workout/${workout._id}` %>">
+                    <%= workout.title %>
+                </a>
+            </li>
+        <% }); %>
+    </ul>
+     
+    <% } %>
+    </br>
+    <div class="action-container">
+        <a class="btn btn-primary" href="<%= `/workout/new` %>">New workoutplan</a>
+    </div>

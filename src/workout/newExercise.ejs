@@ -1,17 +1,29 @@
 <div class="data-form">
-    <form class="form-signin" action="<%= `/workout/` + workoutID + `/new/exercise`%>" method="POST">
-        <h1><%= workoutID %></h1>
-      <h2 class="form-signin-heading">Create a new exercise:</h2>
-      <label for="inputTitle">Name</label>
-      <input type="text" name="name" id="inputTitle" class="form-control" placeholder="Title" autofocus>
-      <label for="inputDescription">Description</label>
-      <input type="text" name="description" id="inputDescription" class="form-control" placeholder="Description">
-      <label for="inputNumberOfSets">Number Of Sets</label>
-      <input type="text" name="numberOfSets" id="inputNumberOfSets" pattern="\d*" class="form-control" placeholder="Max Students" required>
-      <label for="inputTimeInMinutes">Time In Minutes </label>
-      <input type="text" name="timeInMinutes" id="inputTimeInMinutes" pattern="\d*" class="form-control" placeholder="Max Students" required>
-      <label for="inputNumberOfRepetitions">Number Of Repetitions</label>
-      <input type="text" name="numberOfRepetitions" id="inputNumberOfRepetitions" pattern="\d*" class="form-control" placeholder="Cost" required>
-      <br /><button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+    <form action="<%= `/workout/` + workoutID + `/new/exercise`%>" method="POST">
+      <h2 class="form-signin-heading">Create new exercise</h2>
+      <div class="form-group">
+        <label for="inputTitle">Name</label>
+        <input type="text" name="name" id="inputTitle" class="form-control" placeholder="Name" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <input type="text" name="description" id="inputDescription" class="form-control" placeholder="Description">
+      </div>
+      <div class="form-group">
+        <label for="inputNumberOfSets">Number of sets</label>
+        <input type="text" name="numberOfSets" id="inputNumberOfSets" pattern="\d*" class="form-control" placeholder="Number of sets" required>
+      </div>
+      <div class="form-group">
+        <label for="inputTimeInMinutes">Time in minutes</label>
+        <input type="text" name="timeInMinutes" id="inputTimeInMinutes" pattern="\d*" class="form-control" placeholder="Time in minutes" required>
+      </div>
+      <div class="form-group">
+        <label for="inputNumberOfRepetitions">Number of repetitions</label>
+        <input type="text" name="numberOfRepetitions" id="inputNumberOfRepetitions" pattern="\d*" class="form-control" placeholder="Number of repetitions" required>
+      </div>
+      <div class="action-container">
+        <a class="btn btn-primary" href="<%='/workout/' + workoutID %>">Back</a>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
     </form>
   </div>

@@ -20,3 +20,32 @@ body {
     width: 100%;
     text-align: center;
 }
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    width: 100%;
+}
+
+.app-container > div {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.data-form input {
+    max-width: 300px;
+}
+
+.action-container {
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.action-container a, button {
+    margin-right: 8px;
+    align-self: flex-start;
+}

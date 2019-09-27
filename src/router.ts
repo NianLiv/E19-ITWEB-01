@@ -40,12 +40,11 @@ export class AppRouter {
         this.router.use(express.static("public"));
         this.router.use(bodyParser.urlencoded({extended: false}));
         this.router.use(bodyParser.json());
-        //this.router.use(expressValidator());
         
-        this.router.use(cookieParser("secretCuisine123"));
+        this.router.use(cookieParser("secretWorkoutApp123"));
         this.router.use(
           expressSession({
-            secret: "secretCuisine123",
+            secret: "secretWorkoutApp123",
             cookie: {
               maxAge: 4000000
             },

@@ -8,5 +8,5 @@ routes.get('/login', ensureLoggedOut('/'), userController.loginView);
 routes.post('/login', ensureLoggedOut('/'), userController.authenticate);
 routes.get('/sign-up', ensureLoggedOut('/'), userController.signUpView);
 routes.post('/sign-up', ensureLoggedOut('/'), userController.signUp);
-routes.get('/logout', ensureLoggedIn('/user/login'), userController.logout);
+routes.get('/logout', ensureLoggedIn('/user/login'), userController.logout); 
 export default routes;
