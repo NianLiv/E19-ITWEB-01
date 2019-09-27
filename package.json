@@ -4,8 +4,16 @@
   "description": "School assignment",
   "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && nodemon dist/server.js"
+    "build-ts": "tsc",
+    "postinstall": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w"
+  },
+  "engines": {
+    "node": "^8.3.0",
+    "npm": "^5.3.0"
   },
   "repository": {
     "type": "git",
