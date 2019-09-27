@@ -1,23 +1,34 @@
 <h1 ><%= workout.title %></h1>
 
-<ul>
-    <% workout.exercises.forEach(exercise => { %>
-        <li>
-            <p>Name: <%= exercise.name %></p>
-            <p>Description: <%= exercise.description %></p>
-            <p>Sets: <%= exercise.numberOfSets %></p>
-            <p>Repetitions: <%= exercise.numberOfRepetitions %></p>
-            <p>Time: <%= exercise.timeInMinutes %> minutes</p>
-        </li>
-    <% }); %>
-</ul>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Sets</th>
+        <th scope="col">Repetitions</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% workout.exercises.forEach(exercise => { %>
+            <tr scope="row">
+                <th scope="row"><%= exercise.name %></th>
+                <td><%= exercise.description %></td>
+                <td><%= exercise.numberOfSets %> times</td>
+                <td><%= exercise.numberOfRepetitions %> times</td>
+                <td><%= exercise.timeInMinutes %> minutes</td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
   
 <div>
-    <a class="button" href="<%= `/workout/${workout._id}/new/exercise` %>">New Exercise</a>
+    <a class="btn btn-primary btn-block" role="button" href="<%= `/workout/${workout._id}/new/exercise` %>">New Exercise</a>
 </div>
 <div>
-    <a class="button" href="<%= `/workout/${workout._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+    <a class="btn btn-primary btn-block" href="<%= `/workout/${workout._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
 </div>
 <div>
-    <a class="button" href="/workout">Back</a>
+    <a class="btn btn-primary btn-block" href="/workout">Back</a>
 </div>
