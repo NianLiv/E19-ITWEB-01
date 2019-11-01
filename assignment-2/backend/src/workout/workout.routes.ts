@@ -1,20 +1,17 @@
-import {Router} from "express";
-import WorkoutController from "./workout.controller";
+import { Router } from 'express';
+import { auth } from '../user/auth';
+import WorkoutController from './workout.controller';
 
 const routes: Router = Router();
 const workoutCtrl = new WorkoutController();
 
 routes
-    .route('workout-programs')
-        .get(workoutCtrl.getWorkouts)
-        .post(workoutCtrl.createWorkout);
+  .route('/workout-programs')
+  .get(workoutCtrl.getWorkouts)
+  .post(auth, workoutCtrl.createWorkout);
 
-routes
-    .route('workout-programs/:id')
-        .get(workoutCtrl.getSingleWorkout);
+routes.route('/workout-programs/:id').get(workoutCtrl.getWorkout);
 
-routes
-    .route('workout-programs/{id}/exercises')
-        .post();
+routes.route('/workout-programs/:id/exercises').post(workoutCtrl.addExercise);
 
 export default routes;

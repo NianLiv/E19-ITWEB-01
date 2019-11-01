@@ -1,22 +1,10 @@
-import { Router } from "express";
-import workoutRouter from './workout/workout.routes'
+import { Router } from 'express';
+import userRoutes from './user/user.routes';
+import workoutRoutes from './workout/workout.routes';
 
-export class ApiRouter {
-    public router: Router;
+const routes: Router = Router();
 
-    constructor() {
-        this.router = Router();
-        this.setupRouter();
-        this.setRoutes();
-    }
+routes.use('/', workoutRoutes);
+routes.use('/', userRoutes);
 
-    private setRoutes(): void {
-        this.router.use('/api', workoutRouter);
-
-
-    }
-
-    private setupRouter(): void {
-
-    }
-}
+export default routes;

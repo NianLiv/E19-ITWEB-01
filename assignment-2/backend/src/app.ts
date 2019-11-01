@@ -1,34 +1,57 @@
-import bodyParser from "body-parser";
-import express, { Router } from "express";
-import mongoose, { mongo } from "mongoose";
-import { ApiRouter } from "./apiRouter";
+import bodyParser from 'body-parser';
+import express, { NextFunction, Request, Response, Router } from 'express';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import apiRoutes from './apiRouter';
+import User from './user/models/user.model';
+
+// configure environment variables - this should be done as earyly as possible
+// env.config();
 
 class App {
-    public app: express.Application;
-    public mongoUrl: string = process.env.MONGODB_URI || "mongodb://localhost/workoutApp";
-    public router: Router;
+  public app: express.Application;
+  public mongoUrl: string = process.env.MONGODB_URI || 'mongodb://localhost/workoutApp';
+  public router: Router;
 
-    constructor() {
-        this.app = express();
-        this.router = new ApiRouter().router;
-        this.config();
-        this.setupRouter();
-        this.setupMongoose();
-    }
+  constructor() {
+    this.app = express();
+    this.router = apiRoutes;
+    this.configureApp();
+    this.setupRouter();
+    this.setupMongoose();
+    this.setupErrorHandling();
+  }
 
-    private config(): void {
-        this.app.use(bodyParser.json());
-        this.app.use(bodyParser.urlencoded({ extended: false }));
-    }
+  private configureApp(): void {
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
 
-    private setupRouter(): void {
-        this.app.use('/', this.router);
-    }
+    // setup passport
+    this.router.use(passport.initialize());
+    this.router.use(passport.session());
+    passport.use(User.createStrategy());
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
+  }
 
-    private setupMongoose(): void {
-        mongoose.connect(this.mongoUrl, { useNewUrlParser: true });
-        mongoose.set("useCreateIndex", true);
-    }
+  private setupRouter(): void {
+    this.app.use('/api', this.router);
+  }
+
+  private setupMongoose(): void {
+    mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useFindAndModify: false });
+    mongoose.set('useCreateIndex', true);
+  }
+
+  private setupErrorHandling() {
+    this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+      if (err.name === 'UnauthorizedError') {
+        res.status(401).send({ message: 'Unauthorized' });
+      } else {
+        res.status(500).send({ message: 'Unknown error' });
+      }
+    });
+  }
 }
 
 export default new App().app;
