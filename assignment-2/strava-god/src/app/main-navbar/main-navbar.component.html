@@ -1,0 +1,38 @@
+<p>main-navbar works!</p>
+
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="false" 
+        [ngClass]="{hidden: !(isHandset$ | async)}"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>Strava-God</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item>Workouts</a>
+            <a mat-list-item>My Activities</a>
+            <a mat-list-item>Sign-in</a>
+            <a mat-list-item>Sign-up</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" [ngClass]="{screenPadding: !(isHandset$ | async)}">
+            <button type="button"   
+                aria-label="Toggle sidenav" 
+                mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>Strava-God</span>
+            <span class="spacer"></span>
+            <a mat-button>Workouts</a>
+            <a mat-button>My Activities</a>
+            <a mat-button>Sign-in</a>
+            <a mat-button>Sign-up</a>
+        </mat-toolbar>
+
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
