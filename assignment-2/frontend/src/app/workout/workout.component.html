@@ -1,0 +1,32 @@
+<mat-card class="workout-card">
+    <mat-card-header>
+        <h1>Workouts</h1>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <div class="info" *ngIf="(workouts$ | async)?.length==0">
+            <p>There are no workouts yet.</p>
+            <p *ngIf="!(isAuthenticated$ | async)">You have to be loggedin to create workouts</p>
+            <p *ngIf="isAuthenticated$ | async">Go create new workouts by clicking the fab-button</p>
+        </div>
+
+        <div class="workout-container" *ngIf="(workouts$ | async)?.length > 0">
+            <mat-card class="single-workout-card" *ngFor="let workout of workouts$ | async">
+                <mat-card-header>
+                    <p>{{ workout.title }}</p>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="viewWorkout()">View</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="(isAuthenticated$ | async)">
+        <button mat-fab class="add-btn" (click)="createWorkout()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,56 @@
+.workout-card {
+    margin-top: 5vh;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info {
+    margin-left: 35px;
+    padding-top: 35px;
+}
+
+.info p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.workout-card .mat-card-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.workout-card .mat-card-content::-webkit-scrollbar {
+    display: none;
+}
+
+.workout-container {
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.single-workout-card {
+    height: 100px;
+    width: 250px;
+    display: inline-block;
+    margin: 25px;
+    background-color: rgb(230, 230, 230);
+}
+
+.single-workout-card p {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.single-workout-card button {
+    position: absolute;
+    right: 25px;
+}
+
+.add-btn {
+    position: absolute;
+    right: 35px;
+    bottom: 35px;
+}
