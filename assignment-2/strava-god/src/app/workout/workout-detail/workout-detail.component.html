@@ -1,1 +1,22 @@
-<p>workout-detail works!</p>
+<mat-card class="workout-detail-card">
+
+    <mat-card-header>
+        <mat-card-title>Workout: {{ workout.title }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <app-exercise-list
+            [exercises]="workout.exercises">
+        </app-exercise-list>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <span class="spacer"></span>
+        <button mat-stroked-button (click)="goBack()" class="btn-back" color="primary">Back</button>
+        <button mat-stroked-button (click)="addExercise()" class="btn-add" color="primary">Add exercise</button>
+        <button mat-stroked-button (click)="logActivity()" class="btn-log" color="primary">Add to activity</button>
+    </mat-card-actions>
+
+</mat-card>
+
+

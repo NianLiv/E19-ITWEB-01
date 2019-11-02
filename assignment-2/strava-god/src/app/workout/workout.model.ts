@@ -1,6 +1,8 @@
+import { Exercise } from './exercise/exercise.model';
+
 export interface Workout {
-    id: string,
-    title: string, 
-    owner: string,
-    // List of Excercise.Model's
+    id: string;
+    title: string; 
+    owner: string;
+    exercises?: Exercise[];
 }

@@ -1,1 +1,12 @@
-<p>workout-item works!</p>
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <mat-icon>directions_run</mat-icon>
+        </div>
+        <mat-card-title>{{ workout.title }}</mat-card-title>
+        <mat-card-subtitle>{{ workout.owner }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+        <button mat-stroked-button (click)="viewWorkout()" class="btn-view" color="primary">View</button>
+    </mat-card-actions>
+</mat-card>

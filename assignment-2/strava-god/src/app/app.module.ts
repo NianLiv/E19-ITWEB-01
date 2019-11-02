@@ -10,6 +10,8 @@ import { WorkoutListComponent } from './workout/workout-list/workout-list.compon
 import { WorkoutItemComponent } from './workout/workout-item/workout-item.component';
 import { WorkoutDetailComponent } from './workout/workout-detail/workout-detail.component';
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
+import { ExerciseListComponent } from './workout/exercise/exercise-list/exercise-list.component';
+import { CreateWorkoutDialogComponent } from './workout/create-workout-dialog/create-workout-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { MainNavbarComponent } from './main-navbar/main-navbar.component';
     WorkoutItemComponent,
     WorkoutDetailComponent,
     MainNavbarComponent,
+    ExerciseListComponent,
+    CreateWorkoutDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,7 @@ import { MainNavbarComponent } from './main-navbar/main-navbar.component';
     MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CreateWorkoutDialogComponent]
 })
 export class AppModule { }

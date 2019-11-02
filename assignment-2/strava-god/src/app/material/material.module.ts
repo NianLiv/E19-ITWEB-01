@@ -23,6 +23,7 @@ import * as Material from "@angular/material";
     Material.MatDialogModule,
     Material.MatSidenavModule,
     Material.MatListModule,
+    Material.MatCardModule,
   ],
   exports: [
     Material.MatToolbarModule,
@@ -43,6 +44,7 @@ import * as Material from "@angular/material";
     Material.MatDialogModule,
     Material.MatSidenavModule,
     Material.MatListModule,
+    Material.MatCardModule,
   ],
   declarations: []
 })

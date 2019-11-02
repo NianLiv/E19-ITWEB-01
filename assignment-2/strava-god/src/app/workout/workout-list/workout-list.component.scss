@@ -1,0 +1,21 @@
+.workout-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 95%;
+}
+
+.btn-add {
+    position: fixed;
+    z-index: 1;
+    right: 100px;
+    bottom: 100px;
+}
+
+@media (max-width: 768px) {
+    .workout-container {
+        justify-content: center;
+    }
+}

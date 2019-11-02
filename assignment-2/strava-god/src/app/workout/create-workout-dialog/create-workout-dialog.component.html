@@ -1,0 +1,7 @@
+<h3>Create Workout</h3>
+<form>
+    <mat-form-field class="full-width" [ngClass]="{ 'has-error': isSubmitted && formControls.firstName.errors }">
+            <input matInput type="text" placeholder="Title" formControlName="firstName">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="btn-create">Create</button>
+</form>

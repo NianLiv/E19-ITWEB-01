@@ -1,0 +1,23 @@
+.workout-detail-card {
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-card-header {
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+.mat-card-content {
+    overflow-y: auto;
+}
+
+.mat-card-actions {
+    display: flex;
+    padding-top: 25px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

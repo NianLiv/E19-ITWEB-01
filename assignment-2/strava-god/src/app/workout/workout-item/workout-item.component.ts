@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Workout } from '../workout.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-item',
   templateUrl: './workout-item.component.html',
   styleUrls: ['./workout-item.component.scss']
 })
-export class WorkoutItemComponent implements OnInit {
+export class WorkoutItemComponent {
+  @Input() workout!: Workout;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  private viewWorkout(): void {
+    this.router.navigate(['/workout', this.workout.id]);
   }
 
 }
