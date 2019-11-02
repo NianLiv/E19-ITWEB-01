@@ -1,6 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import mongoose, { Document, PassportLocalSchema, Schema } from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
+import { Activity } from '../../activity/activity.model';
 
 export interface IUser {
   _id: any;
@@ -8,6 +9,7 @@ export interface IUser {
   lastName: string;
   email: string;
   fullName: string;
+  activities: Activity[];
 }
 
 export interface LoggedInUser {
@@ -48,6 +50,9 @@ export const userSchema = new Schema<UserModel>(
       required: true,
       lowercase: true,
       unique: true,
+    },
+    activities: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'Activity' }],
     },
   },
   {

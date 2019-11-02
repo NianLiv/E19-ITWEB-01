@@ -52,7 +52,7 @@ export default class WorkoutController {
       const workout = new Workout({ title: req.body.title, owner: req.user.id } as IWorkout);
       await workout.save();
       await workout.populate('owner').execPopulate();
-      res.send(workout);
+      res.status(200).send(workout);
     } catch (err) {
       res.status(500).send(err);
     }
@@ -85,7 +85,7 @@ export default class WorkoutController {
     // authorization
     const workout = await Workout.findById(workoutProgramId);
     if (!workout) {
-      res.status(400).send({ message: `No workout found with id: ${workoutProgramId}` });
+      res.status(404).send({ message: `No workout found with id: ${workoutProgramId}` });
       return;
     }
     if (workout.owner !== req.user.id) {
