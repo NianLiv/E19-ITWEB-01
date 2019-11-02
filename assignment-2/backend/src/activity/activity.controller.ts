@@ -79,7 +79,7 @@ export class ActivityController {
 
     // create activity
     try {
-      const activity = new activityModel({ workout: req.body.workoutId });
+      const activity = new activityModel({ workout: req.body.workoutId, comment: req.body.comment });
       await activity.save();
       await activity.populate('workout').execPopulate();
       await user.update({
