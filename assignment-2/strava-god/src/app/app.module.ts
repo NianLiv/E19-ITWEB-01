@@ -6,10 +6,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
+import { WorkoutItemComponent } from './workout/workout-item/workout-item.component';
+import { WorkoutDetailComponent } from './workout/workout-detail/workout-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    WorkoutListComponent,
+    WorkoutItemComponent,
+    WorkoutDetailComponent,
   ],
   imports: [
     BrowserModule,
