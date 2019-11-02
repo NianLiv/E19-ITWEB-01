@@ -15,8 +15,7 @@ export class WorkoutService {
   constructor(private httpClient: HttpClient) { }
 
   public getWorkouts(): Observable<void> {
-    return this.httpClient.get<any>(this.endpoint).pipe(
-      map(res => res.json),
+    return this.httpClient.get<Workout[]>(this.endpoint).pipe(
       tap(workout => this.workouts$.next(workout)),
       mapTo(undefined)
     )
