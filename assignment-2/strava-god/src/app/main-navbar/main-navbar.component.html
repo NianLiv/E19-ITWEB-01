@@ -15,7 +15,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <mat-toolbar color="primary" [ngClass]="{screenPadding: !(isHandset$ | async)}">
+        <mat-toolbar color="primary" class="screenPadding">
             <button type="button"   
                 aria-label="Toggle sidenav" 
                 mat-icon-button (click)="drawer.toggle()"
@@ -30,7 +30,9 @@
             <a mat-button>Sign-up</a>
         </mat-toolbar>
 
-        <ng-content></ng-content>
+        <div class="screenPadding">
+            <ng-content></ng-content>
+        </div>
     </mat-sidenav-content>
 
 </mat-sidenav-container>
