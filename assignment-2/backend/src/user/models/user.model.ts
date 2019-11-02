@@ -10,7 +10,11 @@ export interface IUser {
   fullName: string;
 }
 
-export type LoggedInUser = Pick<IUser, '_id' | 'email' | 'fullName'>;
+export interface LoggedInUser {
+  id: any;
+  email: string;
+  fullName: string;
+}
 
 export interface UserModel extends IUser, Document {
   generateJwtToken(): string;
@@ -45,7 +49,6 @@ export const userSchema = new Schema<UserModel>(
       lowercase: true,
       unique: true,
     },
-    workouts: [{ type: Schema.Types.ObjectId, ref: 'Workout' }],
   },
   {
     timestamps: true,
@@ -64,7 +67,7 @@ userSchema.methods.generateJwtToken = function(this: UserModel) {
   const expiry = Math.floor(new Date().getTime() / 1000 + 3600); // 1 hour;
   return sign(
     {
-      _id: this._id,
+      id: this._id,
       email: this.email,
       fullName: this.fullName,
       exp: expiry,
@@ -72,5 +75,8 @@ userSchema.methods.generateJwtToken = function(this: UserModel) {
     process.env.JWT_SECRET as string,
   );
 };
+
+userSchema.set('toJSON', { virtuals: true });
+userSchema.set('toObject', { virtuals: true });
 
 export default mongoose.model<UserModel>('User', userSchema);

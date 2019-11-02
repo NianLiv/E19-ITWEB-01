@@ -1,11 +1,12 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import { IUser } from '../../user/models/user.model';
 import { Exercise } from './exercise.model';
 
 export interface IWorkout {
   _id: any;
   title: string;
   exercises: Exercise[];
-  owner: string;
+  owner: IUser;
 }
 
 // tslint:disable-next-line: no-empty-interface
@@ -23,10 +24,7 @@ export const workoutSchema = new Schema<Workout>(
       type: String,
       required: true,
     },
-    owner: {
-      type: String,
-      required: true,
-    },
+    owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     exercises: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }],
   },
   {

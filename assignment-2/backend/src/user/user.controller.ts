@@ -17,13 +17,17 @@ export default class UserController {
 
   public signUp(req: TypedRequest<UserSignUpDTO>, res: Response, next: NextFunction) {
     const newUser = new User(req.body);
-    User.register(newUser, req.body.password, (e, user) => {
+    User.register(newUser, req.body.password, (e, user: UserModel) => {
       if (user) {
-        // TODO return user with generated jwt token
-        res.status(200).send(user);
+        const token = user.generateJwtToken();
+        res.status(200).send({ token });
       } else {
         res.send(500).send('Failed during user registration');
       }
     });
+  }
+
+  public logout(req: Request, res: Response, next: NextFunction) {
+    // TODO
   }
 }
