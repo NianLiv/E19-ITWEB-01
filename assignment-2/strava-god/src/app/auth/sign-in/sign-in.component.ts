@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/user/user.model';
 
 @Component({
   selector: 'app-sign-in',
@@ -25,7 +24,7 @@ export class SignInComponent implements OnInit {
   }
 
   get formControls() {
-     return this.loginForm.controls; 
+     return this.loginForm.controls;
   }
 
   login(): void {
@@ -33,7 +32,7 @@ export class SignInComponent implements OnInit {
     if(this.loginForm.invalid){
       return;
     }
-    
+
     console.log(this.loginForm.value);
     this.authService.login();
     this.router.navigateByUrl('/workout');
