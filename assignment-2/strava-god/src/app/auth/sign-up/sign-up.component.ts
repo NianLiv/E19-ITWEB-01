@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-
   signupForm: FormGroup;
-  isSubmitted: boolean = false;
+  isSubmitted = false;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) 
-  { }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -22,17 +24,18 @@ export class SignUpComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       password: ['', Validators.required],
+      repeatPassword: ['', Validators.required]
     });
   }
 
   signup(): void {
-    this.isSubmitted = true;
-    if(this.signupForm.invalid){
+    this.signupForm.markAllAsTouched();
+    if (this.signupForm.invalid) {
       return;
     }
 
-    console.log(this.signupForm.value);
-    this.router.navigateByUrl('/');
+    this.auth
+      .signUp(this.signupForm.value)
+      .subscribe(() => this.router.navigateByUrl('/'));
   }
-
 }

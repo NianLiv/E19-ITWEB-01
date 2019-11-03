@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Workout, CreateWorkout } from './workout.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { mapTo, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { tap, mapTo } from 'rxjs/operators';
+import { CreateWorkout, Workout } from './workout.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutService {
+  private readonly workoutEndpoint: string =
+    environment.apiRoot + '/workout-programs';
 
-  private readonly workoutEndpoint: string = environment.apiRoot + '/workout-programs';
+  workouts$ = new BehaviorSubject<Workout[] | undefined>(undefined);
 
-  workouts$: BehaviorSubject<Workout[] | undefined> = new BehaviorSubject<Workout[] | undefined>(undefined);
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   public getWorkouts(): Observable<void> {
     return this.httpClient.get<Workout[]>(this.workoutEndpoint).pipe(
