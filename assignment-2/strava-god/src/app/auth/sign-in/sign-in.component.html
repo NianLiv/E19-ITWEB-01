@@ -1,0 +1,28 @@
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title>Log in</mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="loginForm" class="login-form" (ngSubmit)="login()">
+    <mat-card-content>
+
+      <mat-form-field class="full-width" [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
+        <input matInput type="email" placeholder="Email" formControlName="email">
+      </mat-form-field>
+
+      <div *ngIf="isSubmitted && formControls.email.errors" class="help-block">
+          <div *ngIf="formControls.email.errors.required">Email is required</div>
+      </div>
+
+      <mat-form-field class="full-width" [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
+
+      <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+        <div *ngIf="formControls.password.errors.required">Password is required</div>
+      </div>
+
+    </mat-card-content>
+    <button mat-raised-button color="primary" class="login-btn">Log in</button>
+  </form>
+</mat-card>
