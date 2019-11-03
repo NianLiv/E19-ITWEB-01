@@ -12,6 +12,6 @@ routes
 
 routes.route('/workout-programs/:id').get(workoutCtrl.getWorkout);
 
-routes.route('/workout-programs/:id/exercises').post(workoutCtrl.addExercise);
+routes.route('/workout-programs/:id/exercises').post(auth, workoutCtrl.addExercise);
 
 export default routes;

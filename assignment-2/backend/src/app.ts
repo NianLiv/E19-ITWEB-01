@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import cors, { CorsOptions } from 'cors';
 import express, { NextFunction, Request, Response, Router } from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
@@ -17,6 +18,7 @@ class App {
     this.app = express();
     this.router = apiRoutes;
     this.configureApp();
+    this.setupCors();
     this.setupRouter();
     this.setupMongoose();
     this.setupErrorHandling();
@@ -51,6 +53,20 @@ class App {
         res.status(500).send({ message: 'Unknown error' });
       }
     });
+  }
+
+  private setupCors() {
+    const whiteList = ['http://localhost:4200', 'https://workout-app-a2.herokuapp.com'];
+    const corsOptions: CorsOptions = {
+      origin: (origin, callback) => {
+        if (whiteList.indexOf(origin || '') !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+    };
+    this.app.use(cors(corsOptions));
   }
 }
 
