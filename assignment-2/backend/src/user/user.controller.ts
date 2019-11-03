@@ -16,18 +16,15 @@ export default class UserController {
   }
 
   public signUp(req: TypedRequest<UserSignUpDTO>, res: Response, next: NextFunction) {
+    console.log(req);
     const newUser = new User(req.body);
     User.register(newUser, req.body.password, (e, user: UserModel) => {
       if (user) {
         const token = user.generateJwtToken();
         res.status(200).send({ token });
       } else {
-        res.send(500).send('Failed during user registration');
+        res.status(500).send('Fail during user registration');
       }
     });
-  }
-
-  public logout(req: Request, res: Response, next: NextFunction) {
-    // TODO
   }
 }
