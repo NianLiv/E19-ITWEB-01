@@ -22,7 +22,7 @@ export default class UserController {
         const token = user.generateJwtToken();
         res.status(200).send({ token });
       } else {
-        res.status(500).send('Fail during user registration');
+        res.status(500).send(e);
       }
     });
   }
