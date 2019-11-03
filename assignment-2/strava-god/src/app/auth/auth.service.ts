@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { UserSignUp } from './user.model';
+import { User, UserSignUp } from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class AuthService {
   private readonly authEndpoint = `${environment.apiRoot}/user`;
 
   isAuthenticated$ = new BehaviorSubject<boolean>(this.hasToken());
+  currentUser$ = new BehaviorSubject<User | null>(this.getUserFromToken());
   token$ = new BehaviorSubject<string | null>(this.getToken());
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   private getToken(): string {
     return localStorage.getItem(this.tokenStorageKey);
@@ -24,10 +26,16 @@ export class AuthService {
   private setToken(token: string): void {
     localStorage.setItem(this.tokenStorageKey, token);
     this.token$.next(token);
+    this.isAuthenticated$.next(true);
+    this.currentUser$.next(this.jwtHelper.decodeToken(token));
   }
 
   private hasToken(): boolean {
     return !!localStorage.getItem(this.tokenStorageKey);
+  }
+
+  private getUserFromToken(): User {
+    return this.jwtHelper.decodeToken(this.getToken());
   }
 
   public login(email: string, password: string): Observable<void> {
@@ -53,6 +61,8 @@ export class AuthService {
 
   public logout(): void {
     localStorage.removeItem('token');
+    this.token$.next(null);
     this.isAuthenticated$.next(false);
+    this.currentUser$.next(null);
   }
 }

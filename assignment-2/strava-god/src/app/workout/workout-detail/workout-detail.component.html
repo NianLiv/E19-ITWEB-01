@@ -25,14 +25,17 @@
       >
         Back
       </button>
-      <button
-        mat-stroked-button
-        (click)="addExercise()"
-        class="btn-add"
-        color="primary"
-      >
-        Add exercise
-      </button>
+      <ng-container *ngIf="currentUser$ | async as currentUser">
+        <button
+          *ngIf="currentUser.id == workout.owner.id"
+          mat-stroked-button
+          (click)="addExercise()"
+          class="btn-add"
+          color="primary"
+        >
+          Add exercise
+        </button>
+      </ng-container>
       <button
         mat-stroked-button
         (click)="logActivity()"

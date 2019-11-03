@@ -1,19 +1,21 @@
 <h1>Workouts</h1>
 
 <ng-container *ngIf="workouts$ | async as workouts; else loading">
-    <div class="workout-container" *ngIf="workouts.length > 0">
-        <app-workout-item
-            *ngFor="let workout of workouts"
-            [workout]="workout">
-        </app-workout-item>  
-    </div>
+  <div class="workout-container" *ngIf="workouts.length > 0">
+    <app-workout-item *ngFor="let workout of workouts" [workout]="workout">
+    </app-workout-item>
+  </div>
 
-    <button mat-fab class="btn-add" (click)="addWorkout()">
-        <mat-icon>add</mat-icon>
-    </button>
-
+  <button
+    mat-fab
+    *ngIf="isAuthenticated$ | async"
+    class="btn-add"
+    (click)="addWorkout()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </ng-container>
 
 <ng-template #loading>
-    <div>Loading...</div>
+  <div>Loading...</div>
 </ng-template>

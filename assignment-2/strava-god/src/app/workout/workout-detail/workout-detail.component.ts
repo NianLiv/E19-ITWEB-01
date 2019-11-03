@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
+import { CreateExerciseDialogComponent } from '../exercise/create-exercise-dialog/create-exercise-dialog.component';
 import { Workout } from '../workout.model';
 import { WorkoutService } from '../workout.service';
 
@@ -12,24 +15,30 @@ import { WorkoutService } from '../workout.service';
 })
 export class WorkoutDetailComponent implements OnInit {
   workout$: Observable<Workout>;
+  currentUser$ = this.authService.currentUser$;
+  workoutId: string;
 
   constructor(
     private workoutService: WorkoutService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.workout$ = this.route.params.pipe(
       switchMap(params => {
-        const workoutId = params.id;
-        return this.workoutService.getWorkout(workoutId);
+        this.workoutId = params.id;
+        return this.workoutService.getWorkout(this.workoutId);
       })
     );
   }
 
   addExercise(): void {
-    // TODO
+    this.dialog.open(CreateExerciseDialogComponent, {
+      data: { workoutId: this.workoutId, currentUser: this.currentUser$.value }
+    });
   }
 
   logActivity(): void {

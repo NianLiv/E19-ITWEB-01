@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Create new exercise</h1>
+<div mat-dialog-content>
+  <form [formGroup]="exerciseForm" (ngSumbit)="createNewExercise()">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="text"
+        placeholder="Name"
+        [formControl]="exerciseForm.controls.name"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="text"
+        placeholder="Description"
+        [formControl]="exerciseForm.controls.description"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="number"
+        placeholder="Number of sets"
+        [formControl]="exerciseForm.controls.numberOfSets"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="number"
+        placeholder="Number if repetitions"
+        [formControl]="exerciseForm.controls.numberOfRepetitions"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="number"
+        placeholder="Time in minutes"
+        [formControl]="exerciseForm.controls.timeInMinutes"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="createNewExercise()">
+      Create
+    </button>
+  </form>
+</div>
