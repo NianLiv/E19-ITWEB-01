@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkoutService } from '../workout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Workout } from '../workout.model';
-import { map } from 'rxjs/operators';
+import { WorkoutService } from '../workout.service';
 
 @Component({
   selector: 'app-workout-detail',
@@ -12,19 +11,22 @@ import { map } from 'rxjs/operators';
 export class WorkoutDetailComponent implements OnInit {
   private workout: Workout;
 
-  constructor(private workoutService: WorkoutService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private workoutService: WorkoutService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      let workoutId = params.get('id');
-      this.workoutService.getSingleWorkout(workoutId).subscribe(res => {
+      const workoutId = params.get('id');
+      this.workoutService.getWorkout(workoutId).subscribe(res => {
         this.workout = res;
-      })
+      });
     });
   }
 
   private goBack(): void {
-    this.router.navigate(['/workout'])
+    this.router.navigate(['/workout']);
   }
-
 }
