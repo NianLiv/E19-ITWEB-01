@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-ts": "tsc",
-    "prestart": "npm run build-ts",
+    "postinstall": "npm run build-ts",
     "start:watch": "nodemon dist/server.js",
     "start": "npm run serve",
     "serve": "node --require dotenv/config dist/server.js",
