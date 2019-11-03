@@ -6,7 +6,7 @@ import Workout, { CreateWorkoutDTO, IWorkout } from './models/workout.model';
 export default class WorkoutController {
   public async getWorkouts(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
-      const workouts = await Workout.find();
+      const workouts = await Workout.find().populate('owner');
       if (!workouts) {
         res.status(404).send({
           success: false,

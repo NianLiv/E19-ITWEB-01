@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Workout } from '../workout.model';
 import { WorkoutService } from '../workout.service';
 
@@ -9,7 +11,7 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['./workout-detail.component.scss']
 })
 export class WorkoutDetailComponent implements OnInit {
-  private workout: Workout;
+  workout$: Observable<Workout>;
 
   constructor(
     private workoutService: WorkoutService,
@@ -18,15 +20,23 @@ export class WorkoutDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const workoutId = params.get('id');
-      this.workoutService.getWorkout(workoutId).subscribe(res => {
-        this.workout = res;
-      });
-    });
+    this.workout$ = this.route.params.pipe(
+      switchMap(params => {
+        const workoutId = params.id;
+        return this.workoutService.getWorkout(workoutId);
+      })
+    );
   }
 
-  private goBack(): void {
+  addExercise(): void {
+    // TODO
+  }
+
+  logActivity(): void {
+    // TODO
+  }
+
+  goBack(): void {
     this.router.navigate(['/workout']);
   }
 }

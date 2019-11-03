@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Workout } from '../workout.model';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Workout } from '../workout.model';
 
 @Component({
   selector: 'app-workout-item',
@@ -10,10 +10,9 @@ import { Router } from '@angular/router';
 export class WorkoutItemComponent {
   @Input() workout!: Workout;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  private viewWorkout(): void {
+  viewWorkout(): void {
     this.router.navigate(['/workout', this.workout.id]);
   }
-
 }

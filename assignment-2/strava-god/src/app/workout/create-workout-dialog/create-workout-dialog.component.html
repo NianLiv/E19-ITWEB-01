@@ -1,7 +1,16 @@
-<h3>Create Workout</h3>
-<form>
-    <mat-form-field class="full-width" [ngClass]="{ 'has-error': isSubmitted && formControls.firstName.errors }">
-            <input matInput type="text" placeholder="Title" formControlName="firstName">
+<h1 mat-dialog-title>Create new workout</h1>
+<div mat-dialog-content>
+  <form (ngSumbit)="createNewWorkout()">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="text"
+        placeholder="Title"
+        [formControl]="titleControl"
+      />
     </mat-form-field>
-    <button mat-raised-button color="primary" class="btn-create">Create</button>
-</form>
+    <button mat-raised-button color="primary" (click)="createNewWorkout()">
+      Create
+    </button>
+  </form>
+</div>

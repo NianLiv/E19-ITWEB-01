@@ -32,4 +32,6 @@ export const workoutSchema = new Schema<Workout>(
   },
 );
 
+workoutSchema.set('toJSON', { virtuals: true, versionKey: false });
+
 export default mongoose.model<Workout>('Workout', workoutSchema);
