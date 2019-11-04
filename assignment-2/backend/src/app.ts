@@ -50,7 +50,7 @@ class App {
       if (err.name === 'UnauthorizedError') {
         res.status(401).send({ message: 'Unauthorized' });
       } else {
-        res.status(500).send({ message: 'Unknown error' });
+        res.status(500).send(err);
       }
     });
   }
@@ -59,7 +59,7 @@ class App {
     const whiteList = ['http://localhost:4200', 'https://workout-app-a2.herokuapp.com'];
     const corsOptions: CorsOptions = {
       origin: (origin, callback) => {
-        if (whiteList.indexOf(origin || '') !== -1) {
+        if (whiteList.indexOf(origin || '') !== -1 || !origin) {
           callback(null, true);
         } else {
           callback(new Error('Not allowed by CORS'));

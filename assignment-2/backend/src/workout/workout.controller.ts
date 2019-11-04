@@ -68,11 +68,11 @@ export default class WorkoutController {
       return;
     }
     if (
-      !exercise.description ||
-      !exercise.name ||
-      !exercise.numberOfRepetitions ||
-      !exercise.numberOfSets ||
-      !exercise.timeInMinutes
+      exercise.description === undefined ||
+      exercise.name === undefined ||
+      exercise.numberOfRepetitions === undefined ||
+      exercise.numberOfSets === undefined ||
+      exercise.timeInMinutes === undefined
     ) {
       res.status(400).send({ message: 'Parameter validation fail. Missing properties' });
       return;
@@ -83,13 +83,14 @@ export default class WorkoutController {
     }
 
     // authorization
-    const workout = await Workout.findById(workoutProgramId);
+    const workout = (await Workout.findById(workoutProgramId).populate('owner')) as IWorkout;
     if (!workout) {
       res.status(404).send({ message: `No workout found with id: ${workoutProgramId}` });
       return;
     }
-    if (workout.owner !== req.user.id) {
+    if (!workout.owner._id.equals(req.user.id)) {
       res.status(403).send({ message: `No permission to add exercises to workout with id: ${workoutProgramId}` });
+      return;
     }
 
     // add exercise

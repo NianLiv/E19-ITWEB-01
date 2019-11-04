@@ -1,10 +1,11 @@
+import { ObjectId } from 'bson';
 import { sign } from 'jsonwebtoken';
 import mongoose, { Document, PassportLocalSchema, Schema } from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 import { Activity } from '../../activity/activity.model';
 
 export interface IUser {
-  _id: any;
+  _id: ObjectId;
   firstName: string;
   lastName: string;
   email: string;
@@ -19,6 +20,7 @@ export interface LoggedInUser {
 }
 
 export interface UserModel extends IUser, Document {
+  _id: any;
   generateJwtToken(): string;
 }
 

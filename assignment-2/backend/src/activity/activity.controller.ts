@@ -21,7 +21,6 @@ export class ActivityController {
       return;
     }
 
-    console.log(user.activities);
     res.status(200).send(user.activities);
   }
 
@@ -50,7 +49,7 @@ export class ActivityController {
       res.status(500).send({ message: 'User not found' });
       return;
     }
-    const activity = user.activities.find((ac) => ac.id === activityId);
+    const activity = user.activities.find(ac => ac.id === activityId);
     if (!activity) {
       res.status(404).send({ message: `No activity found with id: ${activityId} for user` });
       return;

@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express';
-import passport = require('passport');
 import { TypedRequest } from '../shared/models/custom.model';
 import User, { UserModel, UserSignInDTO, UserSignUpDTO } from './models/user.model';
+import passport = require('passport');
 
 export default class UserController {
   public signIn(req: TypedRequest<UserSignInDTO>, res: Response, next: NextFunction) {

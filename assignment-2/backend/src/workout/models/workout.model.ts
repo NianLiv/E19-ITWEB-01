@@ -1,16 +1,19 @@
+import { ObjectId } from 'bson';
 import mongoose, { Document, Schema } from 'mongoose';
 import { IUser } from '../../user/models/user.model';
 import { Exercise } from './exercise.model';
 
 export interface IWorkout {
-  _id: any;
+  _id: ObjectId;
   title: string;
   exercises: Exercise[];
   owner: IUser;
 }
 
 // tslint:disable-next-line: no-empty-interface
-export interface Workout extends IWorkout, Document {}
+export interface Workout extends IWorkout, Document {
+  _id: any;
+}
 
 export type WorkoutDTO = Pick<IWorkout, '_id' | 'title' | 'owner'>;
 
