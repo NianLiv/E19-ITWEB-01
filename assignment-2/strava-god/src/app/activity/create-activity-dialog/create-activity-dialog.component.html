@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Log activity</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input
+      matInput
+      [formControl]="commentControl"
+      placeholder="Comment (optionel)"
+    />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>CANCEL</button>
+  <button mat-button color="primary" (click)="createActivity()">LOG</button>
+</div>

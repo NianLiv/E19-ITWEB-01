@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ActivityListItemComponent } from './activity/activity-list-item/activity-list-item.component';
+import { ActivityListComponent } from './activity/activity-list/activity-list.component';
+import { CreateActivityDialogComponent } from './activity/create-activity-dialog/create-activity-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -33,7 +36,10 @@ export function tokenGetter() {
     CreateWorkoutDialogComponent,
     SignInComponent,
     SignUpComponent,
-    CreateExerciseDialogComponent
+    CreateExerciseDialogComponent,
+    ActivityListComponent,
+    CreateActivityDialogComponent,
+    ActivityListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,10 @@ export function tokenGetter() {
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateWorkoutDialogComponent, CreateExerciseDialogComponent]
+  entryComponents: [
+    CreateWorkoutDialogComponent,
+    CreateExerciseDialogComponent,
+    CreateActivityDialogComponent
+  ]
 })
 export class AppModule {}

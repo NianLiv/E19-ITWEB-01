@@ -62,6 +62,7 @@ class App {
         if (whiteList.indexOf(origin || '') !== -1 || !origin) {
           callback(null, true);
         } else {
+          console.log('No cors');
           callback(new Error('Not allowed by CORS'));
         }
       },
