@@ -13,11 +13,13 @@ export class AuthService {
   private readonly tokenStorageKey: string = 'token';
   private readonly authEndpoint = `${environment.apiRoot}/user`;
 
+  private jwtHelper = new JwtHelperService();
+
   isAuthenticated$ = new BehaviorSubject<boolean>(this.hasToken());
   currentUser$ = new BehaviorSubject<User | null>(this.getUserFromToken());
   token$ = new BehaviorSubject<string | null>(this.getToken());
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient) {}
 
   private getToken(): string {
     return localStorage.getItem(this.tokenStorageKey);

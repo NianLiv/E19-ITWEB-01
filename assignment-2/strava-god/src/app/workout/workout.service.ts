@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from '../auth/user.model';
 import { CreateExercise } from './exercise/exercise.model';
 import { CreateWorkout, Workout } from './workout.model';
 
@@ -37,14 +36,11 @@ export class WorkoutService {
 
   public addExercise(
     id: string,
-    user: User,
     exercise: CreateExercise
   ): Observable<CreateExercise> {
-    const headers = new HttpHeaders({ user: JSON.stringify(user) });
     return this.httpClient.post<CreateExercise>(
       `${this.workoutEndpoint}/${id}/exercises`,
-      exercise,
-      { headers }
+      exercise
     );
   }
 

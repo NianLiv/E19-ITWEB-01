@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { User } from 'src/app/auth/user.model';
 import { WorkoutService } from '../../workout.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class CreateExerciseDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<CreateExerciseDialogComponent>,
     private workoutService: WorkoutService,
     @Inject(MAT_DIALOG_DATA)
-    public data: { workoutId: string; currentUser: User }
+    public data: { workoutId: string }
   ) {}
 
   ngOnInit() {
@@ -37,14 +36,8 @@ export class CreateExerciseDialogComponent implements OnInit {
       return;
     }
 
-    console.log(this.data.currentUser);
-
     this.workoutService
-      .addExercise(
-        this.data.workoutId,
-        this.data.currentUser,
-        this.exerciseForm.value
-      )
+      .addExercise(this.data.workoutId, this.exerciseForm.value)
       .subscribe(() => this.dialogRef.close());
   }
 }
