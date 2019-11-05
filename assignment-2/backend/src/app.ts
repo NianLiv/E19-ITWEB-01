@@ -56,7 +56,11 @@ class App {
   }
 
   private setupCors() {
-    const whiteList = ['http://localhost:4200', 'https://workout-app-a2.herokuapp.com'];
+    const whiteList = [
+      'http://localhost:4200',
+      'https://workout-app-a2.herokuapp.com',
+      'https://strava-god.herokuapp.com',
+    ];
     const corsOptions: CorsOptions = {
       origin: (origin, callback) => {
         if (whiteList.indexOf(origin || '') !== -1 || !origin) {
