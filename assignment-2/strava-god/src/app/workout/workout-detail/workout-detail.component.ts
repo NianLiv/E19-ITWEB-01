@@ -15,8 +15,9 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['./workout-detail.component.scss']
 })
 export class WorkoutDetailComponent implements OnInit {
-  workout$: Observable<Workout>;
+  isAuthenticated$ = this.authService.isAuthenticated$;
   currentUser$ = this.authService.currentUser$;
+  workout$: Observable<Workout>;
   workoutId: string;
 
   constructor(

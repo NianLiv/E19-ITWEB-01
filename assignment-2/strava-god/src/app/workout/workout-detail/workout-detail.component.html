@@ -37,6 +37,7 @@
         </button>
       </ng-container>
       <button
+        *ngIf="isAuthenticated$ | async"
         mat-stroked-button
         (click)="logActivity(workout)"
         class="btn-log"

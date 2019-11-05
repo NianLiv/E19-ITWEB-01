@@ -39,19 +39,21 @@
       </button>
       <span>Strava-God</span>
       <span class="spacer"></span>
-      <a mat-button routerLink="/workout">Workouts</a>
-      <a mat-button *ngIf="isAuthenticated$ | async" routerLink="/activities"
-        >My Activities</a
-      >
-      <a mat-button *ngIf="!(isAuthenticated$ | async)" routerLink="/sign-in"
-        >Sign In</a
-      >
-      <a mat-button *ngIf="!(isAuthenticated$ | async)" routerLink="/sign-up"
-        >Sign Up</a
-      >
-      <a mat-button (click)="logout()" *ngIf="isAuthenticated$ | async"
-        >Logout</a
-      >
+      <div *ngIf="!(isHandset$ | async)">
+        <a mat-button routerLink="/workout">Workouts</a>
+        <a mat-button *ngIf="isAuthenticated$ | async" routerLink="/activities"
+          >My Activities</a
+        >
+        <a mat-button *ngIf="!(isAuthenticated$ | async)" routerLink="/sign-in"
+          >Sign In</a
+        >
+        <a mat-button *ngIf="!(isAuthenticated$ | async)" routerLink="/sign-up"
+          >Sign Up</a
+        >
+        <a mat-button (click)="logout()" *ngIf="isAuthenticated$ | async"
+          >Logout</a
+        >
+      </div>
     </mat-toolbar>
 
     <div class="screenPadding">
