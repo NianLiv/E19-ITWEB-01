@@ -23,7 +23,7 @@ export class MainNavbarComponent {
     private authServce: AuthService
   ) {}
 
-  private logout(): void {
+  logout(): void {
     this.authServce.logout();
   }
 }

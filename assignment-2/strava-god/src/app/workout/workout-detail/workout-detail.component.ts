@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { CreateActivityDialogComponent } from 'src/app/activity/create-activity-dialog/create-activity-dialog.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CreateExerciseDialogComponent } from '../exercise/create-exercise-dialog/create-exercise-dialog.component';
 import { Workout } from '../workout.model';
@@ -50,8 +51,15 @@ export class WorkoutDetailComponent implements OnInit {
       });
   }
 
-  logActivity(): void {
-    // TODO
+  logActivity(workout: Workout): void {
+    this.dialog.open(CreateActivityDialogComponent, {
+      width: '450px',
+      maxWidth: '100vw',
+      autoFocus: false,
+      data: {
+        workout
+      }
+    });
   }
 
   goBack(): void {

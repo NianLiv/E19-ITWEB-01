@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Exercise } from '../exercise.model';
 
 @Component({
@@ -8,11 +8,15 @@ import { Exercise } from '../exercise.model';
 })
 export class ExerciseListComponent implements OnInit {
   @Input() exercises!: Exercise[];
-  displayedColumns: string[] = ['name', 'description', 'sets', 'times'];
+  displayedColumns: string[] = [
+    'name',
+    'description',
+    'sets',
+    'repetitions',
+    'times'
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
