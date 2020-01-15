@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import mongoose from 'mongoose';
 import { AppRouter } from './router';
 import * as dotenv from 'dotenv';
+import layouts from 'express-ejs-layouts';
 
 class App {
   public app: express.Application;
@@ -20,7 +21,10 @@ class App {
   private config(): void {
     this.app.set('views', ['./src', './src/user', './src/workout']);
     this.app.set('view engine', 'ejs');
+    this.app.use(layouts);
+
     this.app.use(express.static('src/public'));
+
     dotenv.config();
   }
 
