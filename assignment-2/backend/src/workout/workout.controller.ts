@@ -8,16 +8,16 @@ export default class WorkoutController {
     try {
       const workouts = await Workout.find().populate('owner');
       if (!workouts) {
-        res.status(404).send({
+        res.status(404).json({
           success: false,
           message: 'Users not found',
           data: null,
         });
       } else {
-        res.status(200).send(workouts);
+        res.status(200).json(workouts);
       }
     } catch (err) {
-      res.status(500).send(err);
+      res.status(500).json(err);
     }
   }
 
@@ -26,35 +26,35 @@ export default class WorkoutController {
     try {
       const workout = await Workout.findById(workoutId).populate(['exercises', 'owner']);
       if (!workout) {
-        res.status(404).send({
+        res.status(404).json({
           success: false,
           message: 'Workout not found',
           data: null,
         });
       } else {
-        res.status(200).send(workout);
+        res.status(200).json(workout);
       }
     } catch (err) {
-      res.status(500).send(err);
+      res.status(500).json(err);
     }
   }
 
   public async createWorkout(req: TypedRequest<CreateWorkoutDTO>, res: Response, next: NextFunction): Promise<any> {
     if (!req.body.title) {
-      res.status(400).send({ message: 'missing title property' });
+      res.status(400).json({ message: 'missing title property' });
       return;
     }
     if (!req.user) {
-      res.status(500).send({ message: 'No user set' });
+      res.status(500).json({ message: 'No user set' });
       return;
     }
     try {
       const workout = new Workout({ title: req.body.title, owner: req.user.id } as IWorkout);
       await workout.save();
       await workout.populate('owner').execPopulate();
-      res.status(200).send(workout);
+      res.status(200).json(workout);
     } catch (err) {
-      res.status(500).send(err);
+      res.status(500).json(err);
     }
   }
 
@@ -64,7 +64,7 @@ export default class WorkoutController {
 
     // validation
     if (!workoutProgramId) {
-      res.status(400).send({ message: 'No workout program id received' });
+      res.status(400).json({ message: 'No workout program id received' });
       return;
     }
     if (
@@ -74,22 +74,22 @@ export default class WorkoutController {
       exercise.numberOfSets === undefined ||
       exercise.timeInMinutes === undefined
     ) {
-      res.status(400).send({ message: 'Parameter validation fail. Missing properties' });
+      res.status(400).json({ message: 'Parameter validation fail. Missing properties' });
       return;
     }
     if (!req.user) {
-      res.status(500).send({ message: 'No user set' });
+      res.status(500).json({ message: 'No user set' });
       return;
     }
 
     // authorization
     const workout = (await Workout.findById(workoutProgramId).populate('owner')) as IWorkout;
     if (!workout) {
-      res.status(404).send({ message: `No workout found with id: ${workoutProgramId}` });
+      res.status(404).json({ message: `No workout found with id: ${workoutProgramId}` });
       return;
     }
     if (!workout.owner._id.equals(req.user.id)) {
-      res.status(403).send({ message: `No permission to add exercises to workout with id: ${workoutProgramId}` });
+      res.status(403).json({ message: `No permission to add exercises to workout with id: ${workoutProgramId}` });
       return;
     }
 
@@ -97,17 +97,17 @@ export default class WorkoutController {
     const newExercise = new ExerciseModel(exercise);
     const createdExercise = await newExercise.save();
     if (!createdExercise) {
-      res.status(500).send({ message: 'Failed to add exercise to workout' });
+      res.status(500).json({ message: 'Failed to add exercise to workout' });
       return;
     }
     try {
       await Workout.findByIdAndUpdate(workoutProgramId, {
         $addToSet: { exercises: createdExercise },
       });
-      res.status(200).send(createdExercise);
+      res.status(200).json(createdExercise);
     } catch (error) {
       await ExerciseModel.findByIdAndDelete(createdExercise._id);
-      res.status(500).send({ message: `Exercise couldn't be added to workout with id: ${workoutProgramId}` });
+      res.status(500).json({ message: `Exercise couldn't be added to workout with id: ${workoutProgramId}` });
     }
   }
 }
