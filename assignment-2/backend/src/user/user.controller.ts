@@ -5,7 +5,7 @@ import User, { UserModel, UserSignInDTO, UserSignUpDTO } from './models/user.mod
 
 export default class UserController {
   public signIn(req: TypedRequest<UserSignInDTO>, res: Response, next: NextFunction) {
-    passport.authenticate('local', (errors, user: UserModel) => {
+    passport.authenticate('local', { session: false }, (errors, user: UserModel) => {
       if (user) {
         const token = user.generateJwtToken();
         res.status(200).json({ token });

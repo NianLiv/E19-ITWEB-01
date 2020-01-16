@@ -30,10 +30,7 @@ class App {
 
     // setup passport
     this.router.use(passport.initialize());
-    this.router.use(passport.session());
     passport.use(User.createStrategy());
-    passport.serializeUser(User.serializeUser());
-    passport.deserializeUser(User.deserializeUser());
   }
 
   private setupRouter(): void {
